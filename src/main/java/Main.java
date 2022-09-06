@@ -131,33 +131,28 @@ public class Main {
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
 
         List<Student> studentsNationality = studentsList.stream()
-                .sorted(Comparator.comparing(Student::getStudentNationality))
-                .collect(Collectors.toList());
+                .sorted(Comparator.comparing(Student::getStudentNationality)).toList();
         System.out.println("Национальность: " + studentsNationality);
 
         List<Student> studentNationalityFilter = studentsList.stream()
-                .filter(studentNationality -> studentNationality.getStudentNationality().contains("a"))
-                .collect(Collectors.toList());
+                .filter(studentNationality -> studentNationality.getStudentNationality().contains("a")).toList();
         System.out.println("Национальность с применением фильтра: " + studentNationalityFilter);
 
         List<Student> studentAge = studentsList.stream()
-                .filter(studentX -> studentX.getStudentAge() > 18)
-                .collect(Collectors.toList());
+                .filter(studentX -> studentX.getStudentAge() > 18).toList();
         System.out.println("Фильтрация по возрасту: " + studentAge);
 
         List<Student> studentAgeAndGender = studentsList.stream()
                 .filter(student3 -> student3.getStudentGender().contains("M"))
-                .filter(student3 -> student3.getStudentAge() >= 18)
-                .collect(Collectors.toList());
+                .filter(student3 -> student3.getStudentAge() >= 18).toList();
         System.out.println("Фильтрация по возрасту и полу: " + studentAgeAndGender);
 
         List<List<Teacher>> teacherSum = classroomList.stream()
-                .map(Classroom::getTeachers).collect(Collectors.toList());
+                .map(Classroom::getTeachers).toList();
         System.out.println("Смапить учителей: " + teacherSum);
 
         List<List<Student>> studentsSum = classroomList.stream()
-                .map(Classroom::getStudents)
-                .collect(Collectors.toList());
+                .map(Classroom::getStudents).toList();
         System.out.println("Смапить студентов: " + studentsSum);
 
         int sum = studentsList.stream()
@@ -168,8 +163,7 @@ public class Main {
                 .sorted(Comparator.comparing(Student::getStudentEmail))
                 .sorted(Comparator.comparing(Student::getStudentHeight)
                         .thenComparing(x -> x.getStudentEmail().contains("@m"))
-                        .thenComparing(p -> p.getStudentHeight() > 190))
-                .collect(Collectors.toList());
+                        .thenComparing(p -> p.getStudentHeight() > 190)).toList();
         System.out.println("Сортировка по полям Email  и Рост: " + students);
 
         boolean studentAnyMatch = studentsList.stream()
