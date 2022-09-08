@@ -1,10 +1,39 @@
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.io.*;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+
+        try {
+            Scanner scanner = new Scanner(System.in);
+            File file = new File("D:/Raman_Bohdan/Asist-lab/School_R.B/School.txt");
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(scanner.nextLine());
+            bw.close();
+            System.out.println("Запись завершена");
+        } catch (IOException e) {
+            System.out.println("Что-то пошло не так");;
+        }
+
+        try {
+            File file = new File("D:/Raman_Bohdan/Asist-lab/School_R.B/School.txt");
+            //создаем объект FileReader для объекта File
+            FileReader fr = new FileReader(file);
+            //создаем BufferedReader с существующего FileReader для построчного считывания
+            BufferedReader reader = new BufferedReader(fr);
+            // считаем сначала первую строку
+            String line = reader.readLine();
+            while (line != null) {
+                System.out.println(line);
+                // считываем остальные строки в цикле
+                line = reader.readLine();
+                System.out.println("Данные из файла прочитаны");
+            }
+        } catch (IOException e) {
+            System.out.println("Что-то пошло не так");
+        }
+
         Student student = new Student();
         ArrayList<Student> studentsList = new ArrayList<>();
         student.setStudentAge(18);
@@ -186,4 +215,5 @@ public class Main {
             System.out.println(classroom);
         }
     }
+
 }
