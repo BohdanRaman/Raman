@@ -3,9 +3,9 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-
+        Scanner scanner = new Scanner(System.in);
         try {
-            Scanner scanner = new Scanner(System.in);
+
             File file = new File("D:/Raman_Bohdan/Asist-lab/School_R.B/School.txt");
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
