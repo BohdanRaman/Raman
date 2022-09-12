@@ -14,7 +14,7 @@ public class Main {
         //   ReaderFile<List<String>> orderReader = new Reader("D:/Raman_Bohdan/Asist-lab/School_R.B/school.School.txt");
 
         //   FileReader reader = new FileReader("D:/Raman_Bohdan/Asist-lab/School_R.B/school.School.txt");
-        String outputFileName = "D:/Raman_Bohdan/Asist-lab/School_R.B/school.School.txt";
+   /*    String outputFileName = "D:/Raman_Bohdan/Asist-lab/School_R.B/school.School.txt";
 
         try (BufferedReader readerFile = new BufferedReader(new InputStreamReader(System.in))) {
             try (BufferedWriter writter = new BufferedWriter(new FileWriter(outputFileName))) {
@@ -28,8 +28,20 @@ public class Main {
             System.out.println("Что-то пошло не так");
         }
 
+    */
+
         Student student = new Student();
         ArrayList<Student> studentsList = new ArrayList<>();
+        /*   FileWriter writer = null;
+        try {
+            writer = new FileWriter("School.txt");
+
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Что-то пошло не так");
+        }
+
+     */
         student.setStudentAge(18);
         student.setStudentEmail("@gmail.com");
         student.setStudentGender("Man");
@@ -73,6 +85,30 @@ public class Main {
         student2.setStudentSkinColor("Black");
         student2.setStudentPhone(556677889);
         studentsList.add(student2);
+
+        try{
+            FileOutputStream writeData = new FileOutputStream("School.txt");
+            ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
+
+            writeStream.writeObject(studentsList);
+            writeStream.flush();
+            writeStream.close();
+
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try{
+            FileInputStream readData = new FileInputStream("School.txt");
+            ObjectInputStream readStream = new ObjectInputStream(readData);
+
+            ArrayList<Student> students = (ArrayList<Student>) readStream.readObject();
+            readStream.close();
+
+            System.out.println(students.toString());
+        }catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         Teacher teacher = new Teacher();
         teacher.setStudents(studentsList);
