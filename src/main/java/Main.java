@@ -87,8 +87,8 @@ public class Main {
         studentsList.add(student2);
 
         try{
-            FileOutputStream writeData = new FileOutputStream("School.txt");
-            ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
+            FileOutputStream fileOutputStream = new FileOutputStream("School.txt");
+            ObjectOutputStream writeStream = new ObjectOutputStream(fileOutputStream);
 
             writeStream.writeObject(studentsList);
             writeStream.flush();
@@ -99,8 +99,8 @@ public class Main {
         }
 
         try{
-            FileInputStream readData = new FileInputStream("School.txt");
-            ObjectInputStream readStream = new ObjectInputStream(readData);
+            FileInputStream fileInputStream = new FileInputStream("School.txt");
+            ObjectInputStream readStream = new ObjectInputStream(fileInputStream);
 
             ArrayList<Student> students = (ArrayList<Student>) readStream.readObject();
             readStream.close();
