@@ -1,3 +1,5 @@
+package ather_reader;
+
 import java.io.*;
 
 public class ReadToFile {

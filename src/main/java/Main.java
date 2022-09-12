@@ -1,36 +1,30 @@
+import classroom.Classroom;
+import reader.Reader;
+import reader.ReaderFile;
+import school.School;
+import student.Student;
+import teacher.Teacher;
+
 import java.io.*;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        try {
+    public static void main(String[] args) throws IOException {
 
-            File file = new File("D:/Raman_Bohdan/Asist-lab/School_R.B/School.txt");
-            FileWriter fw = new FileWriter(file.getAbsoluteFile());
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(scanner.nextLine());
-            bw.close();
-            System.out.println("Запись завершена");
-        } catch (IOException e) {
-            System.out.println("Что-то пошло не так");;
-        }
+        //   ReaderFile<List<String>> orderReader = new Reader("D:/Raman_Bohdan/Asist-lab/School_R.B/school.School.txt");
 
-        try {
-            File file = new File("D:/Raman_Bohdan/Asist-lab/School_R.B/School.txt");
-            //создаем объект FileReader для объекта File
-            FileReader fr = new FileReader(file);
-            //создаем BufferedReader с существующего FileReader для построчного считывания
-            BufferedReader reader = new BufferedReader(fr);
-            // считаем сначала первую строку
-            String line = reader.readLine();
-            while (line != null) {
-                System.out.println(line);
-                // считываем остальные строки в цикле
-                line = reader.readLine();
-                System.out.println("Данные из файла прочитаны");
+        //   FileReader reader = new FileReader("D:/Raman_Bohdan/Asist-lab/School_R.B/school.School.txt");
+        String outputFileName = "D:/Raman_Bohdan/Asist-lab/School_R.B/school.School.txt";
+
+        try (BufferedReader readerFile = new BufferedReader(new InputStreamReader(System.in))) {
+            try (BufferedWriter writter = new BufferedWriter(new FileWriter(outputFileName))) {
+                String line;
+                while (!(line = readerFile.readLine()).equals("exit")) { // Прерывание цикла при написании строки exit
+                    writter.write(line);
+                }
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             System.out.println("Что-то пошло не так");
         }
 
@@ -215,5 +209,4 @@ public class Main {
             System.out.println(classroom);
         }
     }
-
 }

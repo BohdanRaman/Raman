@@ -1,4 +1,7 @@
+package teacher;
+
 import lombok.Data;
+import student.Student;
 
 import java.util.List;
 @Data
