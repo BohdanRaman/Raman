@@ -5,7 +5,7 @@ import java.io.*;
 public class ReadToFile {
     public static void main(String[] args) {
         try {
-            File file = new File("D:/Raman_Bohdan/Asist-lab/School_R.B/School.txt");
+            File file = new File("School.txt");
             //создаем объект FileReader для объекта File
             FileReader fr = new FileReader(file);
             //создаем BufferedReader с существующего FileReader для построчного считывания

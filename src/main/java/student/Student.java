@@ -1,7 +1,10 @@
 package student;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+
     @Data
+    @AllArgsConstructor
     public class Student {
         private String studentName;
         private String studentSurname;
