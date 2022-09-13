@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class Reader implements ReaderFile <List<String>>{
+public abstract class Reader implements ReaderFile <List<String>>{
     private String path;
     public Reader(String path) {
         path = path;

@@ -1,32 +1,17 @@
 import classroom.Classroom;
+import reader.ReaderFile;
 import school.School;
 import student.Student;
 import teacher.Teacher;
-import java.util.Random.*;
+import java.io.File;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.io.*;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
-        //   ReaderFile<List<String>> orderReader = new Reader("School.txt");
-
-        //   FileReader reader = new FileReader("School.txt");
-   /*    String outputFileName = "School.txt";
-
-        try (BufferedReader readerFile = new BufferedReader(new InputStreamReader(System.in))) {
-            try (BufferedWriter writter = new BufferedWriter(new FileWriter(outputFileName))) {
-                String line;
-                while (!(line = readerFile.readLine()).equals("exit")) { // Прерывание цикла при написании строки exit
-                    writter.write(line);
-                }
-            }
-        }
-        catch (IOException e) {
-            System.out.println("Что-то пошло не так");
-        }
-
-    */
         ArrayList<Student> studentsList = new ArrayList<>();
         Student student = new Student("Maksim", "Pechkin", 18, 123456789,
                 "@gmail.com", 76, 181, 1, "Man", "White",

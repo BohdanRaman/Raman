@@ -3,7 +3,7 @@ package ather_reader;
 import java.io.*;
 
 public class ReadToFile {
-    public static void main(String[] args) {
+    public void writeAndReadFile() {
         try {
             File file = new File("School.txt");
             //создаем объект FileReader для объекта File

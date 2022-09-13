@@ -6,8 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class FileOutputFileInput {
-    public static void main(String[] args) {
-/*
+    /* public FileOutputFileInput runWriteAndRead(String file){
         try {
             FileOutputStream fileOutputStream = new FileOutputStream("School.txt");
             ObjectOutputStream writeStream = new ObjectOutputStream(fileOutputStream);
@@ -32,7 +31,7 @@ public class FileOutputFileInput {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
- */
     }
+
+     */
 }

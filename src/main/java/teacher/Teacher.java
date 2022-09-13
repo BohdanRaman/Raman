@@ -1,12 +1,10 @@
 package teacher;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import student.Student;
 
 import java.util.List;
 @Data
-@AllArgsConstructor
 public class Teacher {
     private List<Student> students;
     private String teacherName;

@@ -4,13 +4,13 @@ import java.io.*;
 import java.util.Scanner;
 
 public class WriteToFile {
-    public static void main(String[] args) {
+    public void writeAndReadFile() {
         try {
             Scanner scanner = new Scanner(System.in);
             File file = new File("School.txt");
-            if(file.createNewFile()){
+            if (file.createNewFile()) {
                 System.out.println("School.txt файл создан в корневой директории проекта");
-            }else System.out.println("School.txt файл уже существует в корневой директории проекта");
+            } else System.out.println("School.txt файл уже существует в корневой директории проекта");
 
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
@@ -23,3 +23,4 @@ public class WriteToFile {
         }
     }
 }
+
