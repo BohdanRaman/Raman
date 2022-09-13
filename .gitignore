@@ -14,10 +14,12 @@
 *.rar
 
 # Intellij
-idea/
+/target
+/.idea
 *.iml
 *.iws
 
 # Maven
 log/
-target/
+/target
+/.idea
