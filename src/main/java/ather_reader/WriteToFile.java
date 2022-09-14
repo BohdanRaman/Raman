@@ -4,23 +4,18 @@ import java.io.*;
 import java.util.Scanner;
 
 public class WriteToFile {
-    public void writeAndReadFile() {
-        try {
-            Scanner scanner = new Scanner(System.in);
-            File file = new File("School.txt");
-            if (file.createNewFile()) {
-                System.out.println("School.txt файл создан в корневой директории проекта");
-            } else System.out.println("School.txt файл уже существует в корневой директории проекта");
+    public static void main(String[] args) throws IOException {
 
-            FileWriter fw = new FileWriter(file.getAbsoluteFile());
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(scanner.nextLine());
-            bw.close();
-
-            System.out.println("Запись завершена");
-        } catch (IOException e) {
-            System.out.println("Error");
+        File file = new File("School.txt");
+        Scanner scanner = new Scanner(file);
+        String text = "";
+        while (scanner.hasNextLine()) {
+            text = text.concat(scanner.nextLine() + "\n");
         }
+
+        FileWriter fw = new FileWriter("School.txt");
+        fw.write(text);
+        fw.close();
+
     }
 }
-

@@ -3,18 +3,54 @@ package ather_reader;
 import java.io.*;
 
 public class ReadToFile {
-    public void writeAndReadFile() {
+
+    private String pathToFile;
+
+    public ReadToFile(String path) {
+        pathToFile = path;
+    }
+
+    public String[] OpenAndRead() throws IOException {
+
+        FileReader x = new FileReader(pathToFile);
+        BufferedReader varRead = new BufferedReader(x);
+
+        int num = 3;
+        String[] lines = new String[num];
+
+        int i;
+        for (i = 0; i < num; i++) {
+            lines[i] = varRead.readLine();
+        }
+        varRead.close();
+        return lines;
+    }
+
+    int numStrings() throws IOException {
+
+        FileReader text = new FileReader(pathToFile);
+        BufferedReader y = new BufferedReader(text);
+
+        String one;
+        int num = 0;
+
+        while ((one = y.readLine()) != null) {
+            num++;
+        }
+        y.close();
+
+        return num;
+    }
+
+
+   /* public void writeAndReadFile() {
         try {
             File file = new File("School.txt");
-            //создаем объект FileReader для объекта File
             FileReader fr = new FileReader(file);
-            //создаем BufferedReader с существующего FileReader для построчного считывания
             BufferedReader reader = new BufferedReader(fr);
-            // считаем сначала первую строку
             String line = reader.readLine();
             while (line != null) {
                 System.out.println(line);
-                // считываем остальные строки в цикле
                 line = reader.readLine();
                 System.out.println("Данные из файла прочитаны");
             }
@@ -22,4 +58,6 @@ public class ReadToFile {
             e.printStackTrace();
         }
     }
+
+    */
 }

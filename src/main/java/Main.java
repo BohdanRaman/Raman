@@ -1,16 +1,28 @@
+import ather_reader.ReadToFile;
 import classroom.Classroom;
-import reader.ReaderFile;
 import school.School;
 import student.Student;
 import teacher.Teacher;
-import java.io.File;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.io.*;
+
+import java.io.IOException;
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+
+        String newPath = "School.txt";
+        try {
+            ReadToFile new_file = new ReadToFile(newPath);
+            String[] aryStrings = new_file.OpenAndRead();
+
+            int i;
+            for (i = 0; i < aryStrings.length; i++) {
+                System.out.println(aryStrings[i]);
+            }
+        }
+        catch (IOException a) {
+            System.out.println(a.getMessage());
+        }
 
         ArrayList<Student> studentsList = new ArrayList<>();
         Student student = new Student("Maksim", "Pechkin", 18, 123456789,
