@@ -3,9 +3,10 @@ package teacher;
 import lombok.Data;
 import student.Student;
 
+import java.io.Serializable;
 import java.util.List;
 @Data
-public class Teacher {
+public class Teacher implements Serializable {
     private List<Student> students;
     private String teacherName;
     private String teacherSurname;

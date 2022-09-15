@@ -16,6 +16,5 @@ public class WriteToFile {
         FileWriter fw = new FileWriter("School.txt");
         fw.write(text);
         fw.close();
-
     }
 }

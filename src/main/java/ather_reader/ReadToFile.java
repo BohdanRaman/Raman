@@ -1,63 +1,36 @@
 package ather_reader;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class ReadToFile {
 
-    private String pathToFile;
-
-    public ReadToFile(String path) {
-        pathToFile = path;
-    }
-
-    public String[] OpenAndRead() throws IOException {
-
-        FileReader x = new FileReader(pathToFile);
-        BufferedReader varRead = new BufferedReader(x);
-
-        int num = 3;
-        String[] lines = new String[num];
-
-        int i;
-        for (i = 0; i < num; i++) {
-            lines[i] = varRead.readLine();
-        }
-        varRead.close();
-        return lines;
-    }
-
-    int numStrings() throws IOException {
-
-        FileReader text = new FileReader(pathToFile);
-        BufferedReader y = new BufferedReader(text);
-
-        String one;
-        int num = 0;
-
-        while ((one = y.readLine()) != null) {
-            num++;
-        }
-        y.close();
-
-        return num;
-    }
-
-
-   /* public void writeAndReadFile() {
+    public void ReadFile(String name) throws FileNotFoundException {
+        String path = "School.txt";
         try {
-            File file = new File("School.txt");
-            FileReader fr = new FileReader(file);
-            BufferedReader reader = new BufferedReader(fr);
-            String line = reader.readLine();
-            while (line != null) {
-                System.out.println(line);
-                line = reader.readLine();
-                System.out.println("Данные из файла прочитаны");
+            File file = new File(path);
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                System.out.println(scanner.nextLine());
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Error");
         }
     }
 
-    */
+    public void WriteFile(String name) throws IOException {
+        File file = new File("School.txt");
+        Scanner scanner = new Scanner(file);
+        String text = "";
+        while (scanner.hasNextLine()) {
+            text = text.concat(scanner.nextLine() + "\n");
+        }
+
+        FileWriter fw = new FileWriter("School.txt");
+        fw.write(text);
+        fw.close();
+    }
 }
+
+

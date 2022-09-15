@@ -1,28 +1,33 @@
-import ather_reader.ReadToFile;
 import classroom.Classroom;
 import school.School;
 import student.Student;
 import teacher.Teacher;
 
-import java.io.IOException;
-import java.util.*;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
-
-        String newPath = "School.txt";
-        try {
-            ReadToFile new_file = new ReadToFile(newPath);
-            String[] aryStrings = new_file.OpenAndRead();
-
-            int i;
-            for (i = 0; i < aryStrings.length; i++) {
-                System.out.println(aryStrings[i]);
-            }
+   /* public static void writeObjectToFile(Classroom obj, File file) throws IOException {
+        try (FileOutputStream fos = new FileOutputStream(file);
+             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            oos.writeObject(obj);
+            oos.flush();
         }
-        catch (IOException a) {
-            System.out.println(a.getMessage());
+    }
+
+    public static Classroom readObjectFromFile(File file) throws IOException, ClassNotFoundException {
+        Classroom result = null;
+        try (FileInputStream fis = new FileInputStream(file);
+             ObjectInputStream ois = new ObjectInputStream(fis)) {
+            result = (Classroom) ois.readObject();
         }
+        return result;
+    }
+    */
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         ArrayList<Student> studentsList = new ArrayList<>();
         Student student = new Student("Maksim", "Pechkin", 18, 123456789,
@@ -165,6 +170,32 @@ public class Main {
                 + "\n" + "Фильтрация по возрасту: " + studentAge
                 + "\n" + "Национальность с применением фильтра: " + studentNationalityFilter
                 + "\n" + "Национальность: " + studentsNationality);
+
+        File file = new File("School.txt");
+        FileOutputStream f = new FileOutputStream(file);
+        ObjectOutputStream o = new ObjectOutputStream(f);
+
+        o.writeObject(studentsList);
+        o.writeObject(teacherList);
+        o.writeObject(classroomList);
+
+        o.close();
+        f.close();
+
+        FileInputStream fi = new FileInputStream(file);
+        ObjectInputStream oi = new ObjectInputStream(fi);
+
+        // Read objects
+        Student pr1 = (Student) oi.readObject();
+        Teacher pr2 = (Teacher) oi.readObject();
+        Classroom pr3 = (Classroom) oi.readObject();
+
+        System.out.println(pr1.toString());
+        System.out.println(pr2.toString());
+        System.out.println(pr3.toString());
+
+        oi.close();
+        fi.close();
     }
 
     public static void printClassroomList(ArrayList<Classroom> classrooms) {
