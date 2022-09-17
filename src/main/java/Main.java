@@ -4,28 +4,14 @@ import student.Student;
 import teacher.Teacher;
 
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
-   /* public static void writeObjectToFile(Classroom obj, File file) throws IOException {
-        try (FileOutputStream fos = new FileOutputStream(file);
-             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-            oos.writeObject(obj);
-            oos.flush();
-        }
-    }
-
-    public static Classroom readObjectFromFile(File file) throws IOException, ClassNotFoundException {
-        Classroom result = null;
-        try (FileInputStream fis = new FileInputStream(file);
-             ObjectInputStream ois = new ObjectInputStream(fis)) {
-            result = (Classroom) ois.readObject();
-        }
-        return result;
-    }
-    */
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
@@ -171,31 +157,60 @@ public class Main {
                 + "\n" + "Национальность с применением фильтра: " + studentNationalityFilter
                 + "\n" + "Национальность: " + studentsNationality);
 
+        try
+        {
+            OutputStream outputFile = new FileOutputStream("School.txt", true);
+            OutputStreamWriter writerClassroom = new OutputStreamWriter(outputFile);
+            BufferedWriter writer = new BufferedWriter(writerClassroom);
+            for (Student value : studentsList) {
+                writer.write(String.valueOf(value));
+                writer.flush();
+                writer.close();
+            }
+        }
+        catch(IOException exception) {
+            System.err.println("Что-то пошло не так");
+
+            try {
+                File file = new File("School.txt");
+                Scanner scanner = new Scanner(file);
+                while (scanner.hasNextLine()) {
+                    System.out.println(scanner.nextLine());
+                }
+                scanner.close();
+            } catch (FileNotFoundException e) {
+                System.err.println("Error");
+            }
+            }
+
+        /*
         File file = new File("School.txt");
-        FileOutputStream f = new FileOutputStream(file);
-        ObjectOutputStream o = new ObjectOutputStream(f);
+        FileOutputStream outputStream = new FileOutputStream(file);
+        ObjectOutputStream objectStream = new ObjectOutputStream(outputStream);
 
-        o.writeObject(studentsList);
-        o.writeObject(teacherList);
-        o.writeObject(classroomList);
+        objectStream.writeObject(studentsList);
+        objectStream.writeObject(teacherList);
+        objectStream.writeObject(classroomList);
 
-        o.close();
-        f.close();
+        objectStream.close();
+        outputStream.close();
 
-        FileInputStream fi = new FileInputStream(file);
-        ObjectInputStream oi = new ObjectInputStream(fi);
+        FileInputStream fileInputStream = new FileInputStream(file);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
         // Read objects
-        Student pr1 = (Student) oi.readObject();
-        Teacher pr2 = (Teacher) oi.readObject();
-        Classroom pr3 = (Classroom) oi.readObject();
+        Student st = (Student) objectInputStream.readObject();
+        Teacher th = (Teacher) objectInputStream.readObject();
+        Classroom cl = (Classroom) objectInputStream.readObject();
 
-        System.out.println(pr1.toString());
-        System.out.println(pr2.toString());
-        System.out.println(pr3.toString());
+        System.out.println(st.toString());
+        System.out.println(th.toString());
+        System.out.println(cl.toString());
 
-        oi.close();
-        fi.close();
+        objectInputStream.close();
+        fileInputStream.close();
+
+         */
     }
 
     public static void printClassroomList(ArrayList<Classroom> classrooms) {
