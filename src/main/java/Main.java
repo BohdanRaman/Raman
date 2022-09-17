@@ -4,14 +4,12 @@ import student.Student;
 import teacher.Teacher;
 
 import java.io.*;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Scanner;
 
 public class Main {
+    public final static String PATH = "D:/Raman_Bohdan/Asist-lab/School_R.B/School.txt";
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
@@ -155,33 +153,31 @@ public class Main {
                 + "\n" + "Фильтрация по возрасту и полу: " + studentAgeAndGender
                 + "\n" + "Фильтрация по возрасту: " + studentAge
                 + "\n" + "Национальность с применением фильтра: " + studentNationalityFilter
-                + "\n" + "Национальность: " + studentsNationality);
+                + "\n" + "Национальность: " + studentsNationality
+                + "\n" + "--------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
-        try
-        {
-            OutputStream outputFile = new FileOutputStream("School.txt", true);
-            OutputStreamWriter writerClassroom = new OutputStreamWriter(outputFile);
-            BufferedWriter writer = new BufferedWriter(writerClassroom);
-            for (Student value : studentsList) {
-                writer.write(String.valueOf(value));
-                writer.flush();
-                writer.close();
+        try (Writer writer = new FileWriter(PATH)) {
+            for (Classroom cl : classroomList) {
+                writer.write(String.valueOf(cl));
+                writer.write(System.getProperty("line.separator"));
             }
+            writer.flush();
+        } catch (Exception e) {
+            System.out.println("Error");
         }
-        catch(IOException exception) {
-            System.err.println("Что-то пошло не так");
 
-            try {
-                File file = new File("School.txt");
-                Scanner scanner = new Scanner(file);
-                while (scanner.hasNextLine()) {
-                    System.out.println(scanner.nextLine());
-                }
-                scanner.close();
-            } catch (FileNotFoundException e) {
-                System.err.println("Error");
+        try {
+
+            FileReader fr = new FileReader(PATH);
+            BufferedReader reader = new BufferedReader(fr);
+            String line = reader.readLine();
+            while (line != null) {
+                System.out.println(line);
+                line = reader.readLine();
             }
-            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error");
+        }
 
         /*
         File file = new File("School.txt");
