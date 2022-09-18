@@ -9,9 +9,13 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Main {
-    public final static String PATH = "D:/Raman_Bohdan/Asist-lab/School_R.B/School.txt";
+    private static final String SEPARATOR = System.getProperty("file.separator");
+    public static final String directory = SEPARATOR + "Raman_Bohdan"
+            + SEPARATOR + "Asist-lab"
+            + SEPARATOR + "School_R.B"
+            + SEPARATOR + "School.txt";
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException {
 
         ArrayList<Student> studentsList = new ArrayList<>();
         Student student = new Student("Maksim", "Pechkin", 18, 123456789,
@@ -156,7 +160,7 @@ public class Main {
                 + "\n" + "Национальность: " + studentsNationality
                 + "\n" + "--------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
-        try (Writer writer = new FileWriter(PATH)) {
+        try (Writer writer = new FileWriter(directory)) {
             for (Classroom cl : classroomList) {
                 writer.write(String.valueOf(cl));
                 writer.write(System.getProperty("line.separator"));
@@ -167,8 +171,7 @@ public class Main {
         }
 
         try {
-
-            FileReader fr = new FileReader(PATH);
+            FileReader fr = new FileReader(directory);
             BufferedReader reader = new BufferedReader(fr);
             String line = reader.readLine();
             while (line != null) {
