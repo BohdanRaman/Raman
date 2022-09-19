@@ -5,8 +5,10 @@ import student.Student;
 
 import java.io.Serializable;
 import java.util.List;
+
 @Data
 public class Teacher implements Serializable {
+    public static final long serialVersionUID = 1L;
     private List<Student> students;
     private String teacherName;
     private String teacherSurname;

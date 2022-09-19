@@ -1,4 +1,6 @@
 import classroom.Classroom;
+import helper.Reader;
+import helper.Writer;
 import school.School;
 import student.Student;
 import teacher.Teacher;
@@ -9,12 +11,6 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Main {
-    private static final String SEPARATOR = System.getProperty("file.separator");
-    public static final String directory = SEPARATOR + "Raman_Bohdan"
-            + SEPARATOR + "Asist-lab"
-            + SEPARATOR + "School_R.B"
-            + SEPARATOR + "School.txt";
-
     public static void main(String[] args) throws IOException {
 
         ArrayList<Student> studentsList = new ArrayList<>();
@@ -118,8 +114,8 @@ public class Main {
                 .filter(studentX -> studentX.getStudentAge() > 18).toList();
 
         List<Student> studentAgeAndGender = studentsList.stream()
-                .filter(student3 -> student3.getStudentGender().contains("M"))
-                .filter(student3 -> student3.getStudentAge() >= 18).toList();
+                .filter(student3 -> student3.getStudentGender().contains("M") && student3.getStudentAge() <= 18)
+                .toList();
 
         List<List<Teacher>> teacherSum = classroomList.stream()
                 .map(Classroom::getTeachers).toList();
@@ -130,6 +126,7 @@ public class Main {
         int sum = studentsList.stream()
                 .map(Student::getStudentAge).mapToInt(Integer::intValue).sum();
 
+        /*  Sorted should be applied one time ? */
         List<Student> students = studentsList.stream()
                 .sorted(Comparator.comparing(Student::getStudentEmail))
                 .sorted(Comparator.comparing(Student::getStudentHeight)
@@ -150,66 +147,21 @@ public class Main {
         System.out.println("NoneMatch: " + studentNoneMatch
                 + "\n" + "AllMatch: " + studentAllMatch
                 + "\n" + "AnyMatch: " + studentAnyMatch
-                + "\n" + "Сортировка по полям Email  и Рост: " + students
-                + "\n" + "Сумма возрастов студентов: " + sum
-                + "\n" + "Смапить студентов: " + studentsSum
-                + "\n" + "Смапить учителей: " + teacherSum
-                + "\n" + "Фильтрация по возрасту и полу: " + studentAgeAndGender
-                + "\n" + "Фильтрация по возрасту: " + studentAge
-                + "\n" + "Национальность с применением фильтра: " + studentNationalityFilter
-                + "\n" + "Национальность: " + studentsNationality
+                + "\n" + "Sorted on Email and height: " + students
+                + "\n" + "Students sum age: " + sum
+                + "\n" + "Spam students: " + studentsSum
+                + "\n" + "Spam teachers : " + teacherSum
+                + "\n" + "Age and gender filtration: " + studentAgeAndGender
+                + "\n" + "Age filtration: " + studentAge
+                + "\n" + "Nationality with used filter: " + studentNationalityFilter
+                + "\n" + "Nationality: " + studentsNationality
                 + "\n" + "--------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
-        try (Writer writer = new FileWriter(directory)) {
-            for (Classroom cl : classroomList) {
-                writer.write(String.valueOf(cl));
-                writer.write(System.getProperty("line.separator"));
-            }
-            writer.flush();
-        } catch (Exception e) {
-            System.out.println("Error");
-        }
+        Writer writer = new Writer("School.txt");
+        writer.writeToFileArrayList(classroomList);
 
-        try {
-            FileReader fr = new FileReader(directory);
-            BufferedReader reader = new BufferedReader(fr);
-            String line = reader.readLine();
-            while (line != null) {
-                System.out.println(line);
-                line = reader.readLine();
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Error");
-        }
-
-        /*
-        File file = new File("School.txt");
-        FileOutputStream outputStream = new FileOutputStream(file);
-        ObjectOutputStream objectStream = new ObjectOutputStream(outputStream);
-
-        objectStream.writeObject(studentsList);
-        objectStream.writeObject(teacherList);
-        objectStream.writeObject(classroomList);
-
-        objectStream.close();
-        outputStream.close();
-
-        FileInputStream fileInputStream = new FileInputStream(file);
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-
-        // Read objects
-        Student st = (Student) objectInputStream.readObject();
-        Teacher th = (Teacher) objectInputStream.readObject();
-        Classroom cl = (Classroom) objectInputStream.readObject();
-
-        System.out.println(st.toString());
-        System.out.println(th.toString());
-        System.out.println(cl.toString());
-
-        objectInputStream.close();
-        fileInputStream.close();
-
-         */
+        Reader read = new Reader("School.txt");
+        read.readFile();
     }
 
     public static void printClassroomList(ArrayList<Classroom> classrooms) {
