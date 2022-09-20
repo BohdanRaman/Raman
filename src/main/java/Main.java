@@ -1,6 +1,6 @@
 import classroom.Classroom;
-import helper.Reader;
-import helper.Writer;
+import helper.FileReader;
+import helper.FileWriter;
 import school.School;
 import student.Student;
 import teacher.Teacher;
@@ -157,10 +157,11 @@ public class Main {
                 + "\n" + "Nationality: " + studentsNationality
                 + "\n" + "--------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
-        Writer writer = new Writer("School.txt");
+
+        FileWriter writer = new FileWriter("School.txt");
         writer.writeToFileArrayList(classroomList);
 
-        Reader read = new Reader("School.txt");
+        FileReader read = new FileReader("School.txt");
         read.readFile();
     }
 
