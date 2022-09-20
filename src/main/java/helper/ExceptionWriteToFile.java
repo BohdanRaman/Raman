@@ -1,8 +1,8 @@
 package helper;
 
-import java.nio.file.NoSuchFileException;
+import java.io.IOException;
 
-public class ExceptionWriteToFile extends NoSuchFileException {
+public class ExceptionWriteToFile extends IOException {
     public ExceptionWriteToFile(String file) {
         super(file);
     }

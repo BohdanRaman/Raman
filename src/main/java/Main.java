@@ -157,12 +157,21 @@ public class Main {
                 + "\n" + "Nationality: " + studentsNationality
                 + "\n" + "--------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
+        FileWriter<Classroom> writerClassroom = new FileWriter<>("SchoolClassroom.txt");
+        writerClassroom.writeToFileArrayList(classroomList);
+        FileWriter<Teacher> writerTeacher = new FileWriter<>("SchoolTeacher.txt");
+        writerTeacher.writeToFileArrayList(teacherList);
+        FileWriter<Student> writerStudent = new FileWriter<>("SchoolStudent.txt");
+        writerStudent.writeToFileArrayList(studentsList);
 
-        FileWriter writer = new FileWriter("School.txt");
-        writer.writeToFileArrayList(classroomList);
-
-        FileReader read = new FileReader("School.txt");
-        read.readFile();
+        FileReader readClassroom = new FileReader("SchoolClassroom.txt");
+        readClassroom.readFile();
+        System.out.println();
+        FileReader readTeacher = new FileReader("SchoolTeacher.txt");
+        readTeacher.readFile();
+        System.out.println();
+        FileReader readStudent = new FileReader("SchoolStudent.txt");
+        readStudent.readFile();
     }
 
     public static void printClassroomList(ArrayList<Classroom> classrooms) {

@@ -11,23 +11,21 @@ public class FileWriter<T> {
     private final String path;
     BufferedWriter writer;
 
-
     public FileWriter(String path) {
         this.path = path;
     }
 
-
-    public void writeToFileArrayList(List<T> strings) {
+    public void writeToFileArrayList(List<T> strings) throws IOException {
         try {
             writer = new BufferedWriter(new java.io.FileWriter(path));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new IOException("Error");
         }
         for (Object string : strings) {
             try {
                 writer.write(string + "\n");
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new IOException("Error");
             }
         }
         try {
