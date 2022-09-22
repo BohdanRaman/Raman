@@ -5,7 +5,7 @@ import school.School;
 import student.Student;
 import teacher.Teacher;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -172,6 +172,16 @@ public class Main {
         System.out.println();
         FileReader readStudent = new FileReader("SchoolStudent.txt");
         readStudent.readFile();
+
+        /*
+        FileWriter writer = new FileWriter();
+        writer.writeObjectToFile(classroomList, new File("SchoolClassroom.txt"));
+        FileWriter writer1 = new FileWriter();
+        writer1.writeObjectToFile(teacherList, new File("SchoolTeacher.txt"));
+        FileWriter writer2 = new FileWriter();
+        writer2.writeObjectToFile(studentsList, new File("SchoolStudent.txt"));
+ */
+
     }
 
     public static void printClassroomList(ArrayList<Classroom> classrooms) {

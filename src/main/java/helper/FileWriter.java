@@ -3,48 +3,52 @@ package helper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.List;
 
 public class FileWriter<T> {
-    private static final Logger logger = LogManager.getLogger();
+
+    private static final Logger Logger = LogManager.getLogger(FileWriter.class);
     private final String path;
+
     BufferedWriter writer;
 
     public FileWriter(String path) {
         this.path = path;
     }
 
-    public void writeToFileArrayList(List<T> strings) throws IOException {
+    public void writeToFileArrayList(List<T> strings) {
+
         try {
             writer = new BufferedWriter(new java.io.FileWriter(path));
-        } catch (IOException e) {
-            throw new IOException("Error");
+        } catch (IOException ex) {
+            Logger.error("Error", ex);
         }
         for (Object string : strings) {
             try {
                 writer.write(string + "\n");
-            } catch (IOException e) {
-                throw new IOException("Error");
+                Logger.info("Show line: " + writer);
+            } catch (IOException exception) {
+                Logger.error("Error", exception);
             }
         }
         try {
             writer.close();
+            Logger.info(writer);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Logger.error("Error", e);
         }
     }
 }
 
-/*
-    public void toFile(String fileName){
-        try {
-            FileOutputStream fout = new FileOutputStream(fileName);
-            ObjectOutputStream out = new ObjectOutputStream(fout);
-            out.writeObject(fout);
-            out.flush();
-            out.close();
-        } catch (Exception ignored) {
-        }
+  /* public void writeObjectToFile(Object obj, File file){
+            try (FileOutputStream fos = new FileOutputStream(file);
+                 ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+                oos.writeObject(obj);
+                oos.flush();
+        } catch (IOException e) {
+                throw new RuntimeException("Error");
+            }
     }
- */
+   */

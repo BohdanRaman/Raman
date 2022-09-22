@@ -24,6 +24,7 @@ public class FileReader extends ExceptionWriteToFile {
             while (line != null) {
                 System.out.println(line);
                 line = reader.readLine();
+                logger.info("Line: " + line);
             }
         } catch (IOException e) {
             throw new ExceptionReadFile("Error");
